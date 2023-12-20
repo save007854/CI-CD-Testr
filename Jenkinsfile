@@ -1,6 +1,8 @@
 pipeline {
     agent any
-	tools {
+	
+	  tools
+    {
        maven "Maven"
     }
  stages {
@@ -29,16 +31,17 @@ pipeline {
           }
         }
      
-  stage('Publish image to Docker Hub') {
-          
-            steps {
-        withDockerRegistry([ credentialsId: "dockerHub", url: "" ]) {
-          sh  'docker push nikhilnidhi/samplewebapp:latest'
-        //  sh  'docker push nikhilnidhi/samplewebapp:$BUILD_NUMBER' 
-        }
-                  
-          }
-        }
+    stage('Publish image to Portainer') {
+        steps {
+            script {
+                // Replace "Portainer" with your Jenkins credentials ID
+                withDockerRegistry([credentialsId: 'Portainer', url: 'your-docker-registry-url']) {
+                    // Your Docker-related steps here
+                    sh 'docker build -t your-image-name:tag .'
+                    sh 'docker push your-docker-registry-url/your-image-name:tag'
+            }
+         }
+      }
      
       stage('Run Docker container on Jenkins Agent') {
              
