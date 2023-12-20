@@ -7,7 +7,7 @@ pipeline {
       stage('checkout') {
            steps {
              
-                git branch: 'master', url: 'https://github.com/save007854/CI-CD-Testr.git'
+                git branch: 'main', url: 'https://github.com/save007854/CI-CD-Testr.git'
              
           }
         }
