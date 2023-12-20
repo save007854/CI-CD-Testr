@@ -8,8 +8,7 @@ pipeline {
  stages {
       stage('checkout') {
            steps {
-             
-                git branch: 'main', url: 'https://github.com/save007854/CI-CD-Testr.git'
+           git branch: 'main', url: 'https://github.com/save007854/CI-CD-Testr.git'
              
           }
         }
@@ -31,18 +30,15 @@ pipeline {
           }
         }
      
-stage('Publish image to Portainer') {
-    steps {
-        script {
+    stage('Publish image to Portainer') {
+      steps {
             // Replace "Portainer" with your Jenkins credentials ID
             withDockerRegistry([credentialsId: 'Portainer', url: 'your-docker-registry-url']) {
                 // Your Docker-related steps here
                 sh 'docker build -t your-image-name:tag .'
                 sh 'docker push your-docker-registry-url/your-image-name:tag'
             }
-        
-    }
-}
+      }
 
       stage('Run Docker container on Jenkins Agent') {
              
