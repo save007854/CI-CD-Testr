@@ -1,6 +1,6 @@
 pipeline {
     agent any
-	
+
 	  tools
     {
        maven "Maven"
@@ -13,13 +13,14 @@ pipeline {
              
           }
         }
+
 	 stage('Execute Maven') {
            steps {
              
                 sh 'mvn package'             
           }
         }
-        
+
 
   stage('Docker Build and Tag') {
            steps {
@@ -52,6 +53,7 @@ pipeline {
  
             }
         }
+
  stage('Run Docker container on remote hosts') {
              
             steps {
